@@ -13,6 +13,7 @@ RUN apt-get update \
         python3.9 \
         python3-dev \
         python3-pip \
+        python3-lxml \
     && apt-get -y autoremove \
     && apt-get clean autoclean \
     && rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
