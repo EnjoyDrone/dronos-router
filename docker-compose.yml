@@ -1,6 +1,7 @@
 services:
+
   aeros_ulog:
-    image: aero41/aeros-ulog:1.0.0
+    image: aero41/aeros-ulog:0.1.0
     build: .
     ports:
       - "14540:14540/udp"

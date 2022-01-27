@@ -1,0 +1,7 @@
+
+services:
+
+  aeros_ulog:
+    devices:
+      - "/dev/ttyACM0:/dev/ttyACM0"
+    command: ["/dev/ttyACM0","926100"]

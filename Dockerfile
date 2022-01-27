@@ -18,10 +18,12 @@ RUN apt-get update \
     && apt-get clean autoclean \
     && rm -rf /var/lib/apt/lists/{apt,dpkg,cache,log} /tmp/* /var/tmp/*
 
-RUN pip install pymavlink
+RUN pip install pymavlink pyserial
 
-WORKDIR ${FIRMWARE_DIR}
 COPY . ${FIRMWARE_DIR}
 
+COPY entrypoint.sh /root/entrypoint.sh
+RUN chmod +x /root/entrypoint.sh
+
 # Run the stream script
-CMD ["python3","./ulog_stream.py"]
+ENTRYPOINT ["/root/entrypoint.sh"]

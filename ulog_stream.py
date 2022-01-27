@@ -12,6 +12,7 @@ Stream ULog data over MAVLink.
 from time import sleep
 import common as cmn
 from pathlib import Path
+from argparse import ArgumentParser
 
 logger = cmn.setup_logging(Path(__file__).stem)
 
@@ -244,8 +245,20 @@ if __name__ == '__main__':
         # Creates the directory structure if not already existing.
         os.makedirs(cmn.log_px4_path, exist_ok=True)
 
-        port = "0.0.0.0:14540"
-        baudrate = 921600
+        parser = ArgumentParser(description=__doc__)
+        parser.add_argument('port', metavar='PORT', nargs='?', default = None,
+                help='Mavlink port name: serial: DEVICE[,BAUD], udp: IP:PORT, tcp: tcp:IP:PORT. Eg: \
+                    /dev/ttyUSB0 or 0.0.0.0:14550')
+        parser.add_argument('baudrate', metavar='PORT', nargs='?', default = 115200, type=int,
+                        help="Mavlink port baud rate (default=115200)")
+        args = parser.parse_args()
+
+        if args.port == None:
+            args.port = "0.0.0.0:14550"
+            print("No port given so take default " + args.port)
+
+        port = args.port
+        baudrate = args.baudrate
         is_armed = False
 
         logger.info(f"Listening PX4 on port {port}, baudrate {baudrate}")
