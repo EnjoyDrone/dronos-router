@@ -1,0 +1,11 @@
+services:
+  aeros_ulog:
+    image: aero41/aeros-ulog:1.0.0
+    build: .
+    ports:
+      - "14540:14540/udp"
+    volumes:
+      - type: bind
+        source: ~/drone
+        target: /root/drone
+    container_name: aeros-ulog
