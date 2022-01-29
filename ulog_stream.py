@@ -21,6 +21,7 @@ import sys, os
 import datetime
 from timeit import default_timer as timer
 os.environ['MAVLINK20'] = '1' # The commands require mavlink 2
+import gzip
 
 try:
     from pymavlink import mavutil
@@ -310,6 +311,10 @@ if __name__ == '__main__':
                     print('Stopp logging')
                     mav_log_streaming.stop_log()
                     mav_log_streaming.close_logfile()
+                    print('Zip ulog')
+                    with open(filename, 'rb') as f_in, gzip.open(filename + '.gz', 'wb') as f_out:
+                        f_out.writelines(f_in)
+                    print('Waiting for drone to arm again')
 
             else:
 
