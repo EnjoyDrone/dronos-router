@@ -32,8 +32,8 @@ COPY main.conf /etc/mavlink-router/main.conf
 
 CMD mavlink-routerd
 
-# COPY entrypoint.sh /root/entrypoint.sh
-# RUN chmod +x /root/entrypoint.sh
+COPY entrypoint.sh /root/entrypoint.sh
+RUN chmod +x /root/entrypoint.sh
 
-# # Run the stream script
-# ENTRYPOINT ["/root/entrypoint.sh"]
+# Run the mavlink-routerd
+ENTRYPOINT ["/root/entrypoint.sh"]

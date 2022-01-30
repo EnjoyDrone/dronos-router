@@ -5,10 +5,10 @@ function show_help {
     echo "Usage: ${0} [-h | CONNECTION_URL | BAUDRATE]"
     echo ""
     echo "CONNECTION_URL format should be :"
-    echo " serial: DEVICE[,BAUD]"
+    echo " serial: DEVICE:BAUD"
     echo " udp: IP:PORT"
     echo " tcp: tcp:IP:PORT"
-    echo "For example /dev/ttyUSB0 or 0.0.0.0:14550";
+    echo "For example /dev/ttyACM0:1500000 or 0.0.0.0:14550";
     echo ""
     echo "By default, the connection is 0.0.0.0:14550."
 }
@@ -38,5 +38,6 @@ elif [ "$#" -gt 2 ]; then
     exit 1;
 fi
 
-cd ${FIRMWARE_DIR} &&
-python3 ulog_stream.py ${CONNECTION_URL} ${BAUDRATE}
+echo "mavlink url is ${CONNECTION_URL}"
+
+mavlink-routerd ${CONNECTION_URL}
