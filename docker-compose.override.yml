@@ -1,0 +1,9 @@
+services:
+
+# simply run (override is automatically added if no argument added)
+# docker-compose up
+
+  aeros_ulog:
+    ports:
+      - "14550:14550/udp"
+    command: ["0.0.0.0:14550"]

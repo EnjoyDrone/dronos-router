@@ -38,6 +38,4 @@ elif [ "$#" -gt 2 ]; then
     exit 1;
 fi
 
-echo "mavlink url is ${CONNECTION_URL}"
-
 mavlink-routerd ${CONNECTION_URL}
