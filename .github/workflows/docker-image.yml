@@ -13,6 +13,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag aeros-ulog:$(date +%s)
+    -
+      name: chechout code
+      uses: actions/checkout@v2
+    -
+      name: install buildx
+      id: buildx
+      uses: crazy-max/ghaction-docker-buildx@v1
+      with:
+          version: latest
+    -
+      name: Build the Docker image
+      run: |
+        docker buildx build . \
+          --tag aero41/aeros-ulog:latest \
+          --platform linux/amd64,linux/arm/v7
