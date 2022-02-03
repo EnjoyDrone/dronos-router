@@ -1,4 +1,4 @@
-FROM debian:11 as builder
+FROM debian:bullseye-20220125 as builder
 
 # Install dependencies
 RUN apt-get update \
@@ -38,5 +38,5 @@ COPY main.conf /etc/mavlink-router/main.conf
 COPY entrypoint.sh /root/entrypoint.sh
 RUN chmod +x /root/entrypoint.sh
 
-# Run the mavlink-routerd
+# Run mavlink-routerd
 ENTRYPOINT ["/root/entrypoint.sh"]
