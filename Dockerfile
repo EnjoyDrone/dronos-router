@@ -1,4 +1,4 @@
-FROM debian:bullseye-20220125 as builder
+FROM debian:bullseye-20220125-slim as builder
 
 # Install dependencies
 RUN apt-get update \
@@ -24,7 +24,7 @@ RUN git clone https://github.com/mavlink-router/mavlink-router.git && cd mavlink
 
 #----------------------------------------------
 
-FROM debian:11 as runtime
+FROM debian:bullseye-20220125-slim as runtime
 
 # Copy mavlink router software built in previous stage to avoid all the build dependencies
 COPY --from=builder /usr/bin/mavlink-routerd \
