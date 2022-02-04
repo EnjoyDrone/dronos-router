@@ -26,5 +26,5 @@ jobs:
       name: Build the Docker image
       run: |
         docker buildx build . \
-          --tag aero41/aeros-ulog:latest \
+          --tag aero41/aeros-router:latest \
           --platform linux/amd64,linux/arm/v7

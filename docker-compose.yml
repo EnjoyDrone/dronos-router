@@ -1,10 +1,10 @@
 services:
 
-  aeros_ulog:
-    image: aero41/aeros-ulog:0.1.0
+  aeros_router:
+    image: aero41/aeros-router:0.1.0
     build: .
     volumes:
       - type: bind
         source: ~/drone
         target: /root/drone
-    container_name: aeros-ulog
+    container_name: aeros-router

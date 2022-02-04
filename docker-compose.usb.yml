@@ -4,7 +4,7 @@ services:
 # use below command to add thes instructions to the base compose file
 # docker-compose -f docker-compose.yml -f docker-compose.usb.yml up
 
-  aeros_ulog:
+  aeros_router:
     devices:
       - "/dev/ttyACM0:/dev/ttyACM0"
     command: ["/dev/ttyACM0:926100"]
