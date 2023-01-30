@@ -1,0 +1,41 @@
+FROM alpine:3 AS builder
+
+# Make a working directory
+WORKDIR /mavlink-router
+
+# Install dependencies
+RUN apk update && apk add --no-cache gcc \
+        g++ \
+        git \
+        pkgconf \
+        meson \
+        ninja \
+        linux-headers \
+        &&  rm -rf /var/cache/apk/*
+
+# Build and install mavlink router
+RUN cd /mavlink-router && git clone https://github.com/mavlink-router/mavlink-router.git .\
+    && git checkout 0e05bff9a906914b1c0b94d1169a4269a2629737 \
+    && git submodule update --init --recursive \
+    && meson setup -Dsystemdsystemunitdir=/usr/lib/systemd/system --buildtype=release build .  \
+    && ninja -C build
+
+#----------------------------------------------
+
+FROM alpine:3 as runtime
+
+WORKDIR /mavlink-router
+
+RUN apk update && apk add --no-cache libstdc++
+
+# Copy mavlink router software built in previous stage to avoid all the build dependencies
+COPY --from=builder /mavlink-router/build/src/mavlink-routerd .
+
+# Copy main.conf which give all the parameters for mavlink router (log, connection, url, etc)
+COPY main.conf /etc/mavlink-router/main.conf
+
+COPY entrypoint.sh /root/entrypoint.sh
+RUN chmod +x /root/entrypoint.sh
+
+# Run mavlink-routerd
+ENTRYPOINT ["/root/entrypoint.sh"]
