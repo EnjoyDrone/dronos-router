@@ -17,7 +17,7 @@ RUN apt-get update \
 
 # Build and install mavlink router
 RUN git clone https://github.com/mavlink-router/mavlink-router.git && cd mavlink-router \
-    && git checkout 0e05bff9a906914b1c0b94d1169a4269a2629737 \
+    && git checkout b24aad6c739f8d162aa4dbc5c55ff75cc8935c10 \
     && git submodule update --init --recursive \
     && meson setup build . \
     && ninja -C build && ninja -C build install

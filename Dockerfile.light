@@ -15,7 +15,7 @@ RUN apk update && apk add --no-cache gcc \
 
 # Build and install mavlink router
 RUN cd /mavlink-router && git clone https://github.com/mavlink-router/mavlink-router.git .\
-    && git checkout 0e05bff9a906914b1c0b94d1169a4269a2629737 \
+    && git checkout b24aad6c739f8d162aa4dbc5c55ff75cc8935c10 \
     && git submodule update --init --recursive \
     && meson setup -Dsystemdsystemunitdir=/usr/lib/systemd/system --buildtype=release build .  \
     && ninja -C build
