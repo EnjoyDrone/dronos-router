@@ -1,5 +1,5 @@
 -----------------------
- AerOS-router
+ Enjoy-router
 -----------------------
 
 Stream MAVLINK data of the connected FCU using [mavlink router](https://github.com/mavlink-router/mavlink-router). Used to stream the data 
